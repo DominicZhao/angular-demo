@@ -11,6 +11,7 @@ import {
   MatSlideToggleModule,
   MatGridListModule,
   MatDialogModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -28,6 +29,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatSlideToggleModule,
     MatGridListModule,
     MatDialogModule,
+    MatAutocompleteModule,
     OverlayModule,
   ],
   exports: [
@@ -41,6 +43,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatSlideToggleModule,
     MatGridListModule,
     MatDialogModule,
+    MatAutocompleteModule,
     OverlayModule,
   ]
 })
