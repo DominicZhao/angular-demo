@@ -15,12 +15,17 @@ export class HeaderComponent implements OnInit {
   }
 
   @Output() toggle = new EventEmitter<void>();
+  @Output() toggleDarkTheme = new EventEmitter<boolean>();
 
   ngOnInit() {
   }
 
   openSidebar() {
     this.toggle.emit();
+  }
+
+  onChange(checked: boolean) {
+    this.toggleDarkTheme.emit(checked);
   }
 
 }

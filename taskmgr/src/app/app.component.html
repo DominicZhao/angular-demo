@@ -1,10 +1,10 @@
-<mat-drawer-container>
+<mat-drawer-container [class.taskmgr-dark-theme]="darkTheme">
   <mat-drawer #drawer class="example-sidenav">
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <div class="site">
     <header>
-      <app-header (toggle)="drawer.toggle()"></app-header>
+      <app-header (toggle)="drawer.toggle()" (toggleDarkTheme)="switchTheme($event)"></app-header>
     </header>
     <main>
       <router-outlet></router-outlet>
