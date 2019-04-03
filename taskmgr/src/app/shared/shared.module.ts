@@ -9,7 +9,11 @@ import {
   MatInputModule,
   MatListModule,
   MatSlideToggleModule,
+  MatGridListModule,
+  MatDialogModule,
 } from '@angular/material';
+
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [],
@@ -22,6 +26,9 @@ import {
     MatInputModule,
     MatListModule,
     MatSlideToggleModule,
+    MatGridListModule,
+    MatDialogModule,
+    OverlayModule,
   ],
   exports: [
     CommonModule,
@@ -32,6 +39,9 @@ import {
     MatInputModule,
     MatListModule,
     MatSlideToggleModule,
+    MatGridListModule,
+    MatDialogModule,
+    OverlayModule,
   ]
 })
 export class SharedModule { }

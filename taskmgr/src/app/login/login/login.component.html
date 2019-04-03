@@ -18,10 +18,10 @@
       </mat-form-field>
       <button mat-raised-button color="primary" type="button">登录</button>
     </mat-card-content>
-    <mat-card-footer class="text-right">
-      <p>还没有账户？<a href="">注册</a></p>
+    <mat-card-actions class="text-right">
+      <p>还没有账户？<a [routerLink]="['/register']" routerLinkActive="router-link-active">注册</a></p>
       <p>忘记密码？<a href="">找回</a></p>
-    </mat-card-footer>
+    </mat-card-actions>
   </mat-card>
   <mat-card>
     <mat-card-header>
@@ -30,11 +30,12 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-subtitle>
-        没有一颗心，会因为追求梦想而受伤。当你真心渴望某样东西时，整个宇宙都会来帮忙。
+      没有一颗心，会因为追求梦想而受伤。当你真心渴望某样东西时，整个宇宙都会来帮忙。
     </mat-card-subtitle>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" />	
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" />
     <mat-card-content>
-        Without a heart, you will be hurt by pursuing your dreams. When you really want something, the whole universe will help.
+      Without a heart, you will be hurt by pursuing your dreams. When you really want something, the whole universe will
+      help.
     </mat-card-content>
   </mat-card>
 </form>
