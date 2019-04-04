@@ -1,0 +1,9 @@
+.new-task {
+  width: 400px;
+}
+
+mat-radio-button {
+  +mat-radio-button {
+    margin-left: 15px;
+  }
+}

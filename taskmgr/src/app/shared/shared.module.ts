@@ -12,6 +12,13 @@ import {
   MatGridListModule,
   MatDialogModule,
   MatAutocompleteModule,
+  MatMenuModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -30,6 +37,13 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatGridListModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     OverlayModule,
   ],
   exports: [
@@ -44,6 +58,13 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatGridListModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     OverlayModule,
   ]
 })
