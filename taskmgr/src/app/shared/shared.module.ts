@@ -22,9 +22,12 @@ import {
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConfirmDialogComponent
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -66,6 +69,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatDatepickerModule,
     MatNativeDateModule,
     OverlayModule,
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule { }

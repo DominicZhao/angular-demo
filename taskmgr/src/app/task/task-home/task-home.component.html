@@ -1,7 +1,17 @@
 <div class="task-lists">
   <app-task-list class="list-container" *ngFor="let list of lists">
-    <app-task-header [header]='list.name' (newTask)="launchNewTaskDialog()" (moveAll)="launchCopyTaskDialog()"></app-task-header>
-    <app-task-item *ngFor="let task of list.tasks" [item]="task">
+    <app-task-header
+      [header]='list.name'
+      (newTask)="launchNewTaskDialog()"
+      (moveAll)="launchCopyTaskDialog()"
+      (ondel)="launchConfirmDialog()"
+      >
+    </app-task-header>
+    <app-task-item
+      *ngFor="let task of list.tasks"
+      [item]="task"
+      (taskClick)="launchUpdateTaskDialog(task)"
+      >
 
     </app-task-item>
   </app-task-list>

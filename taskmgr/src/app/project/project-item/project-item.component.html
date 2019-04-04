@@ -9,7 +9,7 @@
     {{item.desc}}
   </mat-card-content>
   <mat-card-actions>
-    <button type="button" mat-button>
+    <button type="button" mat-button (click)="onEditClick()">
       <mat-icon>note</mat-icon>
       <span>编辑</span>
     </button>
@@ -17,7 +17,7 @@
       <mat-icon>group_add</mat-icon>
       <span>邀请</span>
     </button>
-    <button type="button" mat-button>
+    <button type="button" mat-button (click)="onDelClick()">
       <mat-icon>delete</mat-icon>
       <span>删除</span>
     </button>
