@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
+import { slideToRight } from '../../anims/router.anim';
+
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
-
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 
 @Component({
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
-  styleUrls: ['./task-home.component.scss']
+  styleUrls: ['./task-home.component.scss'],
+  animations: [
+    slideToRight
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskHomeComponent implements OnInit {
+
+  @HostBinding('@routeAnim') state;
 
   lists = [
     {
@@ -78,7 +86,8 @@ export class TaskHomeComponent implements OnInit {
   ];
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {

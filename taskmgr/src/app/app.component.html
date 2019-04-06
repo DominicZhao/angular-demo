@@ -1,6 +1,6 @@
 <mat-drawer-container [class.taskmgr-dark-theme]="darkTheme">
   <mat-drawer #drawer class="example-sidenav">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (navClick)="drawer.toggle()"></app-sidebar>
   </mat-drawer>
   <div class="site">
     <header>
@@ -8,6 +8,7 @@
     </header>
     <main>
       <router-outlet></router-outlet>
+      <!-- <div class="square" [@square]="squareState" (click)="onClick()"></div> -->
     </main>
     <footer>
       <app-footer></app-footer>

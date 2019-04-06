@@ -19,6 +19,7 @@ import {
   MatTooltipModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatSidenavModule,
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -47,6 +48,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSidenavModule,
     OverlayModule,
   ],
   exports: [
@@ -68,6 +70,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSidenavModule,
     OverlayModule,
   ],
   entryComponents: [

@@ -1,8 +1,8 @@
-// .container {
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-// }
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 .card {
   height: 360px;
@@ -10,11 +10,6 @@
   margin: 10px;
 }
 
-:host {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 
 .fab-button {
   position: fixed;
