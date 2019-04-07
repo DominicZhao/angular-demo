@@ -25,6 +25,7 @@ import {
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DirectiveModule } from '../directive/directive.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { DirectiveModule } from '../directive/directive.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -55,6 +58,8 @@ import { DirectiveModule } from '../directive/directive.module';
   ],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -73,7 +78,6 @@ import { DirectiveModule } from '../directive/directive.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
-    OverlayModule,
     DirectiveModule,
   ],
   entryComponents: [
