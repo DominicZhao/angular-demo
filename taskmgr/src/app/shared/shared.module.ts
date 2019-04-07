@@ -24,6 +24,7 @@ import {
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DirectiveModule } from '../directive/directive.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatNativeDateModule,
     MatSidenavModule,
     OverlayModule,
+    DirectiveModule,
   ],
   exports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatNativeDateModule,
     MatSidenavModule,
     OverlayModule,
+    DirectiveModule,
   ],
   entryComponents: [
     ConfirmDialogComponent
