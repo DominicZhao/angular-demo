@@ -31,12 +31,11 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-subtitle>
-      没有一颗心，会因为追求梦想而受伤。当你真心渴望某样东西时，整个宇宙都会来帮忙。
+      {{quote.cn}}
     </mat-card-subtitle>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" />
+    <img mat-card-image [src]="quote.pic" />
     <mat-card-content>
-      Without a heart, you will be hurt by pursuing your dreams. When you really want something, the whole universe will
-      help.
+      {{quote.en}}
     </mat-card-content>
   </mat-card>
 </form>
