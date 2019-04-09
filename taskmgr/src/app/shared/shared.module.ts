@@ -5,6 +5,7 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatInputModule,
   MatListModule,
@@ -27,11 +28,13 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { DirectiveModule } from '../directive/directive.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
+import { AgeInputComponent } from './age-input/age-input.component';
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    AgeInputComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatInputModule,
     MatListModule,
@@ -60,12 +64,14 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
   ],
   exports: [
     ImageListSelectComponent,
+    AgeInputComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatInputModule,
     MatListModule,

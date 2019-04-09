@@ -9,7 +9,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   items: string[];
-  public myForm: FormGroup;
+  public registerForm: FormGroup;
 
   private readonly avatarName = 'avatars';
 
@@ -21,17 +21,22 @@ export class RegisterComponent implements OnInit {
     const img = `${this.avatarName}:svg-${Math.floor(Math.random() * 16).toFixed(0)}`;
     const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     this.items = nums.map(d => `avatars:svg-${d}`);
-    this.myForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       name: ['', Validators.required],
       password: ['', Validators.required],
       repeatPassword: ['', Validators.required],
-      avatar: [img, Validators.required]
+      avatar: [img, Validators.required],
+      dateOfBirth: ['1990-01-01']
     });
   }
 
   onSubmit({ value, valid }, ev: Event) {
     ev.preventDefault();
+    if (!valid) {
+      return;
+    }
+    console.log(value);
   }
 
 }

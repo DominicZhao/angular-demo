@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm,$event)">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm,$event)">
   <mat-card>
     <mat-card-header>
       <mat-card-title>注册:</mat-card-title>
@@ -19,6 +19,7 @@
       <app-image-list-select title="选择头像" cols="6" [items]="items" useSvgIcon="true" formControlName="avatar">
 
       </app-image-list-select>
+      <app-age-input formControlName="dateOfBirth"></app-age-input>
       <button mat-raised-button color="primary" type="submit">注册</button>
     </mat-card-content>
     <mat-card-actions class="text-right">
