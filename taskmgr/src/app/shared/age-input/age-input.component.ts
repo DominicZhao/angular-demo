@@ -82,6 +82,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
     const birthday = this.myForm.get('birthday');
     const ageNum = this.myForm.get('age').get('ageNum');
     const ageUnit = this.myForm.get('age').get('ageUnit');
+    const ageValue = this.myForm.get('age');
 
     //                  toAge
     //                  /
@@ -106,22 +107,31 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
       debounceTime(this.debounceTime),
       distinctUntilChanged(),
     );
-    console.log(ageNum$);
     const ageUnit$ = ageUnit.valueChanges.pipe(
       startWith(ageUnit.value),
       debounceTime(this.debounceTime),
       distinctUntilChanged(),
     );
-    const age$ = Observable.prototype
-      .pipe(
-        combineLatest(ageNum$, ageUnit$, (_n, _u) => {
-          return this.toDate({ age: _n, unit: _u });
-        }),
-        map(d => {
-          return { date: d, from: 'age' };
-        }),
-        filter(_ => this.myForm.get('age').valid)
-      );
+
+    const age$ = ageValue.valueChanges.pipe(
+      combineLatest(ageNum$, ageUnit$, (_age) => {
+        return this.toDate({ age: _age.ageNum, unit: _age.ageUnit });
+      }),
+      map(d => {
+        return { date: d, from: 'age' };
+      }),
+      filter(_ => this.myForm.get('age').valid)
+    );
+    // const age$ = Observable.prototype
+    //   .pipe(
+    //     combineLatest(ageNum$, ageUnit$, (_n, _u) => {
+    //       return this.toDate({ age: _n, unit: _u });
+    //     }),
+    //     map(d => {
+    //       return { date: d, from: 'age' };
+    //     }),
+    //     filter(_ => this.myForm.get('age').valid)
+    //   );
 
     const merged$ = Observable.prototype
       .pipe(
@@ -140,7 +150,6 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
         }
         this.propagateChange(d.date);
       } else {
-        console.log(2);
         const ageToCopare = this.toAge(birthday.value);
         if (age.age !== ageToCopare.age || age.unit !== ageToCopare.unit) {
           birthday.patchValue(d.date, { emitEvent: false });
@@ -236,7 +245,6 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
   toDate(age: Age): string {
     const now = Date.now();
-    console.log(age);
     switch (age.unit) {
       case AgeUnit.Year: {
         return format(subYears(now, age.age), this.format);
