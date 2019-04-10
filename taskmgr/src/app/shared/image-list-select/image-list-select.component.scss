@@ -8,6 +8,7 @@ mat-icon.avatar {
   margin: 12px;
 }
 
+
 .scroll-container {
   overflow-y: scroll;
   height: 200px;
@@ -54,5 +55,8 @@ mat-icon.avatar {
 }
 
 .cover {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
   width: 150px;
 }

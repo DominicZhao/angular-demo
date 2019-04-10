@@ -44,6 +44,28 @@ userId: 58f5a904edc76ab0e033cfc3
 GET http://localhost:3000/taskLists?_embed=tasks&projectId=p0001
 
 ###
+
+POST http://localhost:3000/localhost:3000/taskLists
+Content-Type: application/json
+
+{
+	"name": "list1",
+	"order": 1,
+	"projectId": "Hya1moGb-"
+}
+
+###
+
+PUT http://localhost:3000/localhost:3000/taskLists/BkenST66lb
+Content-Type: application/json
+
+{
+	"name": "list1",
+	"order": 1,
+	"projectId": "Sk2HaTagb"
+}
+
+###
 GET https://taskmgr.wilddogio.com/projects.json?auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjoxLCJpYXQiOjE0OTMzNzczMzksInVzZXJfaWQiOiI0N2RhYTQyYzczNmQ4MTZiY2IzZGMyMmFhYmRiIiwiaXNzIjoiaHR0cHM6Ly90YXNrbWdyLndpbGRkb2dpby5jb20iLCJuYW1lIjoiIiwicGljdHVyZSI6IiIsImVtYWlsIjoid2FuZ0AxNjMuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXIiOiIiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJ3aWxkZG9nIjp7ImlkZW50aXRpZXMiOnsicGFzc3dvcmQiOlsid2FuZ0AxNjMuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifSwiZXhwIjoxNDk4MjE1NzM5fQ.gXnf90cq_KSqQ75XfpmUBq_jpksLi4pUvcV4LPIikx4
 
 ###

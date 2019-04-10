@@ -7,7 +7,6 @@ import { Observable, from } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
   })
 };
 
@@ -67,7 +66,7 @@ export class ProjectService {
    * @memberof ProjectService
    */
   delProject(project: Project): Observable<Project> {
-    const delTakes$ = from(project.taskLists).pipe(
+    const delTakes$ = from(project.taskLists ? project.taskLists : []).pipe(
       mergeMap(listId => this.http.delete(`${this.config.uri}/taskLists/${listId}`)),
       count()
     );

@@ -1,15 +1,23 @@
-<form>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm, $event)">
   <h2 mat-dialog-title>{{title}}</h2>
   <mat-dialog-content>
     <mat-form-field class="full-width">
-      <input matInput type="text" placeholder="项目名称">
+      <input matInput type="text" placeholder="项目名称" formControlName="name">
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input matInput type="text" placeholder="项目描述">
+      <input matInput type="text" placeholder="项目描述" formControlName="desc">
     </mat-form-field>
+    <app-image-list-select
+      title="选择封面"
+      cols="6"
+      [items]="coverImages"
+      useSvgIcon="false"
+      formControlName="coverImg">
+
+    </app-image-list-select>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="button" mat-raised-button color="primary" (click)="save()">保存</button>
+    <button type="submit" mat-raised-button color="primary">保存</button>
     <button type="button" mat-raised-button mat-dialog-close>关闭</button>
   </mat-dialog-actions>
 </form>
