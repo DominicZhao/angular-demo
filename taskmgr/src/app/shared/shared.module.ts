@@ -21,6 +21,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatSidenavModule,
+  MatChipsModule,
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -29,12 +30,14 @@ import { DirectiveModule } from '../directive/directive.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { AgeInputComponent } from './age-input/age-input.component';
+import { ChipsListComponent } from './chips-list/chips-list.component';
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
     ImageListSelectComponent,
-    AgeInputComponent
+    AgeInputComponent,
+    ChipsListComponent
   ],
   imports: [
     CommonModule,
@@ -59,12 +62,14 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatChipsModule,
     OverlayModule,
     DirectiveModule,
   ],
   exports: [
     ImageListSelectComponent,
     AgeInputComponent,
+    ChipsListComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -87,6 +92,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatChipsModule,
     DirectiveModule,
   ],
   entryComponents: [

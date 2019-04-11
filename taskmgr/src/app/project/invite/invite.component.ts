@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { User } from '../../domain';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-invite',
@@ -8,31 +10,22 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class InviteComponent implements OnInit {
 
-  public options = [
-    {
-      id: 1,
-      name: '张三'
-    },
-    {
-      id: 2,
-      name: '李四'
-    },
-    {
-      id: 3,
-      name: '王五'
-    }
-  ];
+  public members: User[] = [];
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data,
+    private dialogRef: MatDialogRef<InviteComponent>
+  ) { }
 
   ngOnInit() {
+    this.members = [...this.data.members];
   }
 
-  displayUser(user: { id: string; name: string }) {
-    return user ? user.name : '';
-  }
-
-  save() {
-
+  onSubmit(ev: Event, {value, valid}) {
+    ev.preventDefault();
+    if (!valid) {
+      return;
+    }
+    this.dialogRef.close(this.members);
   }
 }
