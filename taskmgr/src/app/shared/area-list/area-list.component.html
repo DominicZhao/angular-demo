@@ -1,3 +1,28 @@
-<p>
-  area-list works!
-</p>
+<div class="address-group">
+  <div>
+    <mat-select placeholder="请输入省份" [(ngModel)]="_address.province" name="province" (ngModelChange)="onProvinceChange()">
+      <mat-option *ngFor="let p of provinces$ | async" [value]="p">
+        {{p}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div>
+    <mat-select placeholder="请输入城市" [(ngModel)]="_address.city" name="city" (ngModelChange)="onCityChange()">
+      <mat-option *ngFor="let c of cities$ | async" [value]="c">
+        {{c}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div>
+    <mat-select placeholder="请输入区县" [(ngModel)]="_address.district" name="district" (ngModelChange)="onDistrictChange()">
+      <mat-option *ngFor="let d of districts$ | async" [value]="d">
+        {{d}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div class="street">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="请输入详细地址" [(ngModel)]="_address.street" (change)="onStreetChange()">
+    </mat-form-field>
+  </div>
+</div>

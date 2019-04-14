@@ -22,6 +22,7 @@ import {
   MatNativeDateModule,
   MatSidenavModule,
   MatChipsModule,
+  MatTabsModule,
 } from '@angular/material';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -67,6 +68,7 @@ import { AreaListComponent } from './area-list/area-list.component';
     MatNativeDateModule,
     MatSidenavModule,
     MatChipsModule,
+    MatTabsModule,
     OverlayModule,
     DirectiveModule,
   ],
@@ -99,6 +101,7 @@ import { AreaListComponent } from './area-list/area-list.component';
     MatNativeDateModule,
     MatSidenavModule,
     MatChipsModule,
+    MatTabsModule,
     DirectiveModule,
   ],
   entryComponents: [

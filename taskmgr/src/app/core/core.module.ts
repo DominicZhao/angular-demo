@@ -36,7 +36,7 @@ import '../utils/debug.utils';
     {
       provide: 'BASE_CONFIG',
       useValue: {
-        uri: 'http://localhost:3000'
+        uri: 'http://localhost:4200'
       }
     }
   ]
