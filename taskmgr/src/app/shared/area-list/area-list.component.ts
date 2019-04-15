@@ -45,7 +45,7 @@ export class AreaListComponent implements OnInit, OnDestroy, ControlValueAccesso
   public _street = new Subject();
   public provinces$: Observable<string[]>;
   public cities$: Observable<string[]>;
-  public districts$: Observable<void>;
+  public districts$: Observable<any>;
   public sub: Subscription;
 
   constructor(
@@ -72,9 +72,15 @@ export class AreaListComponent implements OnInit, OnDestroy, ControlValueAccesso
 
     this.provinces$ = of(getProvinces());
     this.cities$ = province$.pipe(map((p: string) => getCitiesByProvince(p)));
-    this.districts$ = combineLatest(province$, city$, (p: string, c: string) => {
-      getAreaByCity(p, c);
+    const dis$ = combineLatest(province$, city$, (p: string, c: string) => {
+      return getAreaByCity(p, c);
     });
+
+    dis$.subscribe(
+      data => {
+        this.districts$ = of(data);
+      }
+    );
   }
 
   ngOnDestroy() {

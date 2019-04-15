@@ -8,8 +8,7 @@ import {
   FormGroup
 } from '@angular/forms';
 import { IdentityType, Identity } from '../../domain';
-import { Subject, Observable, Subscription } from 'rxjs';
-import { combineLatest } from 'rxjs/operators';
+import { Subject, Observable, Subscription, combineLatest } from 'rxjs';
 import { extractInfo, isValidAddr } from '../../utils/identity.util';
 import { isValidDate } from '../../utils/date.utils';
 
@@ -66,17 +65,19 @@ export class IdentityInputComponent implements OnInit, OnDestroy, ControlValueAc
   ) { }
 
   ngOnInit() {
-    const val$ = Observable.prototype.pipe(
-      combineLatest(this.idNo, this.idType, (_id, _type) => {
-        return {
-          identityType: _type,
-          identityNo: _id
-        };
-      })
-    );
-    this.sub = val$.subscribe(id => {
-      this.propagateChange(id);
+    // const val$ = Observable.prototype.pipe(
+    //   combineLatest(this.idNo, this.idType, (_id, _type) => {
+    //     return {
+    //       identityType: _type,
+    //       identityNo: _id
+    //     };
+    //   })
+    // );
+    const val$ = combineLatest(this.idNo, this.idType);
+    this.sub = val$.subscribe(([idNo, idType]) => {
+      this.propagateChange({ identityType: idType, identityNo: idNo });
     });
+
   }
 
   ngOnDestroy() {
@@ -123,7 +124,7 @@ export class IdentityInputComponent implements OnInit, OnDestroy, ControlValueAc
   validateIdCard(c: FormControl): { [key: string]: any } {
     const val = c.value.identityNo;
     if (val.length !== 18) {
-      return {idInvalid: true};
+      return { idInvalid: true };
     }
     const pattern = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}[x0-9]$/;
     let result = false;
@@ -133,26 +134,27 @@ export class IdentityInputComponent implements OnInit, OnDestroy, ControlValueAc
         result = true;
       }
     }
-    return result ? null : {idInvalid: true};
+    return result ? null : { idInvalid: true };
   }
 
   validateMilitary(c: FormControl): { [key: string]: any } {
     const val = c.value.identityNo;
     const pattern = /[\u4e00-\u9fa5](字第)(\d{4,8})(号?)$/;
-    return pattern.test(val) ? null : {idInvalid: true};
+    return pattern.test(val) ? null : { idInvalid: true };
   }
 
   validatePassport(c: FormControl): { [key: string]: any } {
     const val = c.value.identityNo;
     if (val.length !== 9) {
-      return {idInvalid: true};
+      return { idInvalid: true };
     }
-    const pattern =  /^[GgEe]\d{8}$/;
-    return pattern.test(val) ? null : {idInvalid: true};
+    const pattern = /^[GgEe]\d{8}$/;
+    return pattern.test(val) ? null : { idInvalid: true };
   }
 
   onIdTypeChange(idType: IdentityType) {
     this._idType.next(idType);
+    console.log(this.idType);
   }
 
   onIdNoChange(idNo: string) {
