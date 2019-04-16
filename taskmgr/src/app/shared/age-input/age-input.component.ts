@@ -113,25 +113,6 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
       distinctUntilChanged(),
     );
 
-    // const age$ = ageValue.valueChanges.pipe(
-    //   combineLatest(ageNum$, ageUnit$, (_age) => {
-    //     return this.toDate({ age: _age.ageNum, unit: _age.ageUnit });
-    //   }),
-    //   map(d => {
-    //     return { date: d, from: 'age' };
-    //   }),
-    //   filter(_ => this.myForm.get('age').valid)
-    // );
-    // const age$ = Observable.prototype
-    //   .pipe(
-    //     combineLatest(ageNum$, ageUnit$, (_n, _u) => {
-    //       return this.toDate({ age: _n, unit: _u });
-    //     }),
-    //     map(d => {
-    //       return { date: d, from: 'age' };
-    //     }),
-    //     filter(_ => this.myForm.get('age').valid)
-    //   );
     const age$ = combineLatest(ageNum$, ageUnit$, (_n, _u) => {
       return this.toDate({ age: _n, unit: _u });
     }).pipe(
