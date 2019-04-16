@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, forwardRef, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import { map, filter, startWith, debounceTime, distinctUntilChanged, merge, combineLatest } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { map, filter, startWith, debounceTime, distinctUntilChanged, merge } from 'rxjs/operators';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import {
   subDays,
   subMonths,
@@ -113,15 +113,15 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
       distinctUntilChanged(),
     );
 
-    const age$ = ageValue.valueChanges.pipe(
-      combineLatest(ageNum$, ageUnit$, (_age) => {
-        return this.toDate({ age: _age.ageNum, unit: _age.ageUnit });
-      }),
-      map(d => {
-        return { date: d, from: 'age' };
-      }),
-      filter(_ => this.myForm.get('age').valid)
-    );
+    // const age$ = ageValue.valueChanges.pipe(
+    //   combineLatest(ageNum$, ageUnit$, (_age) => {
+    //     return this.toDate({ age: _age.ageNum, unit: _age.ageUnit });
+    //   }),
+    //   map(d => {
+    //     return { date: d, from: 'age' };
+    //   }),
+    //   filter(_ => this.myForm.get('age').valid)
+    // );
     // const age$ = Observable.prototype
     //   .pipe(
     //     combineLatest(ageNum$, ageUnit$, (_n, _u) => {
@@ -132,6 +132,20 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
     //     }),
     //     filter(_ => this.myForm.get('age').valid)
     //   );
+    const age$ = combineLatest(ageNum$, ageUnit$, (_n, _u) => {
+      return this.toDate({ age: _n, unit: _u });
+    }).pipe(
+      map(d => {
+        return { date: d, from: 'age' };
+      }),
+      filter(_ => this.myForm.get('age').valid)
+    );
+
+    age$.subscribe(
+      _ => {
+        // console.log(_);
+      }
+    );
 
     const merged$ = Observable.prototype
       .pipe(
