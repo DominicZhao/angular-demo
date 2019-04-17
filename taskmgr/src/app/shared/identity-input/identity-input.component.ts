@@ -154,7 +154,6 @@ export class IdentityInputComponent implements OnInit, OnDestroy, ControlValueAc
 
   onIdTypeChange(idType: IdentityType) {
     this._idType.next(idType);
-    console.log(this.idType);
   }
 
   onIdNoChange(idNo: string) {

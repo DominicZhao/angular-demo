@@ -43,9 +43,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
         filter(_ => this.registerForm.get('identity').valid)
       );
     this.sub = id$.subscribe(id => {
-      const info = extractInfo(id.identity);
+      const info = extractInfo(id.identityNo);
       if (isValidAddr(info.addrCode)) {
         const addr = getAddrByCode(info.addrCode);
+        console.log(addr);
         this.registerForm.get('address').patchValue(addr);
       }
       if (isValidDate(info.dateOfBirth)) {
@@ -65,7 +66,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (!valid) {
       return;
     }
-    console.log(value);
   }
 
 }

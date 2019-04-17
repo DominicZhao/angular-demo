@@ -92,6 +92,7 @@ export class AreaListComponent implements OnInit, OnDestroy, ControlValueAccesso
   private propagateChange = (_: any) => { };
 
   writeValue(value: Address): void {
+    console.log(value);
     if (value) {
       this._address = value;
       if (this._address.province) {
