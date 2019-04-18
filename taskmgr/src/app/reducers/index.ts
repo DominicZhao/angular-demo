@@ -35,34 +35,3 @@ export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
   ],
 })
 export class AppStoreModule { }
-
-
-// import {
-//   ActionReducer,
-//   ActionReducerMap,
-//   createFeatureSelector,
-//   createSelector,
-//   MetaReducer
-// } from '@ngrx/store';
-// import { environment } from '../../environments/environment';
-
-// export interface State {
-
-// }
-
-// export const reducers: ActionReducerMap<State> = {
-
-// };
-
-
-// export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
-// NgModule
-// import { reducers, metaReducers } from './reducers';
-// import { EffectsModule } from '@ngrx/effects';
-// import { AppEffects } from '../app.effects';
-
-// imports: [
-//   StoreModule.forRoot(reducers, { metaReducers }),
-//   EffectsModule.forRoot([AppEffects]),
-// ]
