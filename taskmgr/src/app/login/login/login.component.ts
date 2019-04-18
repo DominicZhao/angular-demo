@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { QuoteService } from '../../services/quote.service';
 import { Quote } from 'src/app/domain/quote.model';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/quote.action';
 
 @Component({
   selector: 'app-login',
@@ -12,20 +15,14 @@ import { Quote } from 'src/app/domain/quote.model';
 export class LoginComponent implements OnInit {
 
   public myForm: FormGroup;
-  public quote: Quote = {
-    'cn': '我们在人生中会作出许多选择，带着这些选择继续生活，才是人生中最难的一课。《妙笔生花》',
-    'en': 'We all make our choices in life. The hard thing to do is live with them.',
-    'pic': '/assets/img/quotes/9.jpg'
-  };
+  public quote$: Observable<Quote>;
 
   constructor(
     private fb: FormBuilder,
-    private quoteService$: QuoteService
+    private store$: Store<fromRoot.State>
   ) {
-    this.quoteService$.getQuote()
-      .subscribe(
-        data => this.quote = data
-      );
+    this.quote$ = this.store$.select(fromRoot.getQuote);
+    this.store$.dispatch(new actions.LoadAction(null));
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import { StoreModule, combineReducers, ActionReducer } from '@ngrx/store';
+import { StoreModule, ActionReducerMap, MetaReducer, createSelector } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -12,24 +12,19 @@ export interface State {
   quote: fromQuote.State;
 }
 
-const initialState: State = {
-  quote: fromQuote.initialState
-};
-
-const reducers = {
+export const reducers: ActionReducerMap<State> = {
   quote: fromQuote.reducer
 };
 
-const productionReducers: ActionReducer<State> = combineReducers(reducers);
-const developmentReducers: ActionReducer<State> = combineReducers(storeFreeze(reducers));
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze] : [];
 
-export function reducer(state = initialState, action: any): State {
-  return productionReducers(state, action);
-}
+export const getQuoteState = (state: State) => state.quote;
+
+export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 
 @NgModule({
   imports: [
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
   ],

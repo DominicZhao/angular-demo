@@ -31,11 +31,11 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-subtitle>
-      {{quote.cn}}
+      {{(quote$ | async).cn}}
     </mat-card-subtitle>
-    <img mat-card-image [src]="quote.pic" />
+    <img mat-card-image [src]="(quote$ | async).pic" />
     <mat-card-content>
-      {{quote.en}}
+      {{(quote$ | async).en}}
     </mat-card-content>
   </mat-card>
 </form>

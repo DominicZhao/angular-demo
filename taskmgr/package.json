@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
+    "server": "json-server --watch ../mock/data.json --port 3000",
+    "start": "concurrently \"ng serve --proxy-config proxy.config.json\" \"npm run server\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
