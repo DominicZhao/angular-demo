@@ -1,6 +1,3 @@
-export const QUOTE = 'Quote';
-export const QUOTE_SUCCESS = 'Quote Success';
-export const QUOTE_FAIL = 'Quote Fail';
 import { Action } from '@ngrx/store';
 import { Quote } from '../domain';
 
@@ -42,6 +39,6 @@ export class LoadFailAction implements Action {
  * so that reducers can easily compose action types
  */
 export type QuoteActions
-                        = LoadAction
-                        | LoadSuccessAction
-                        | LoadFailAction;
+    = LoadAction
+    | LoadSuccessAction
+    | LoadFailAction;
