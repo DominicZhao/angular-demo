@@ -42,6 +42,17 @@
       "roleIds": [
         1
       ]
+    },
+    {
+      "email": "18235442177@163.com",
+      "name": "小赵",
+      "password": "123456",
+      "repeatPassword": "123456",
+      "avatar": "avatars:svg-2",
+      "dateOfBirth": "1990-01-01",
+      "identity": null,
+      "address": null,
+      "id": "u40P2Gm"
     }
   ],
   "projects": [
@@ -295,4 +306,3 @@
     }
   ]
 }
-

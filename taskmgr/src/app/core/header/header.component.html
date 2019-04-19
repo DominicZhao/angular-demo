@@ -1,8 +1,11 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="openSidebar()">
+  <button mat-icon-button (click)="openSidebar()" *ngIf="(auth$ | async)?.token">
     <mat-icon>menu</mat-icon>
   </button>
   <span>企业级协作平台</span>
   <span class="fill-remaining-space"></span>
   <mat-slide-toggle (change)="onChange($event.checked)">夜间模式</mat-slide-toggle>
+  <span>
+    <a mat-button *ngIf="(auth$ | async)?.token" href="" (click)="logout()">退出</a>
+  </span>
 </mat-toolbar>

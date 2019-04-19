@@ -32,7 +32,6 @@ export class AuthService {
    * @memberof AuthService
    */
   register(user: User): Observable<Auth> {
-    user.id = null;
     const url = `${this.config.uri}/${this.domain}`;
     return this.http.get(url, { params: { 'email': user.email } })
       .pipe(
