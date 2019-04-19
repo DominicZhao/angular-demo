@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
@@ -30,22 +30,22 @@ export class AuthEffects {
         ))
     );
 
-    @Effect()
+    @Effect({ dispatch: false })
     logout$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGOUT),
-        tap(_ => this.router.navigate(['/']))
+        tap(() => this.router.navigate(['/']))
     );
 
-    @Effect()
+    @Effect({ dispatch: false })
     loginAndNavigate$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN_SUCCESS),
-        tap(_ => this.router.navigate(['/project']))
+        tap(() => this.router.navigate(['/project']))
     );
 
-    @Effect()
+    @Effect({ dispatch: false })
     registerAndNavigate$: Observable<Action> = this.actions$.pipe(
-        ofType(actions.ActionTypes.LOGOUT),
-        tap(_ => this.router.navigate(['/project']))
+        ofType(actions.ActionTypes.REGISTER_SUCCESS),
+        tap(() => this.router.navigate(['/project']))
     );
     constructor(
         private actions$: Actions,
