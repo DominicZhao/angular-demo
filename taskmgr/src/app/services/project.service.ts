@@ -1,8 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project } from '../domain';
+import { Project, User } from '../domain';
 import { map, mergeMap, count, switchMap, mapTo } from 'rxjs/operators';
 import { Observable, from } from 'rxjs';
+import * as _ from 'lodash';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -72,7 +73,7 @@ export class ProjectService {
     );
 
     return delTakes$.pipe(
-      switchMap(_ => this.http.delete(`${this.config.uri}/${this.domain}/${project.id}`)),
+      switchMap(() => this.http.delete(`${this.config.uri}/${this.domain}/${project.id}`)),
       mapTo(project)
     );
   }
@@ -90,5 +91,22 @@ export class ProjectService {
       .pipe(
         map(res => res as Project[])
       );
+  }
+
+  invite(projectId: string, users: User[]): Observable<Project> {
+    const url = `${this.config.uri}/${this.domain}/${projectId}`;
+
+    return this.http.get(url).pipe(
+      map(res => res as Project),
+      switchMap((project: Project) => {
+        const existingMenbers = project.members;
+        const invitedIds = users.map(user => user.id);
+        const newIds = _.union(existingMenbers, invitedIds);
+        return this.http.patch(url, JSON.stringify({members: newIds}), httpOptions)
+        .pipe(
+          map(res => res as Project),
+        );
+      })
+    );
   }
 }
