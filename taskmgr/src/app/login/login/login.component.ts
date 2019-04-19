@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/quote.action';
+import * as authActions from '../../actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -31,15 +32,17 @@ export class LoginComponent implements OnInit {
     //   password: new FormControl('', Validators.required)
     // });
     this.myForm = this.fb.group({
-      email: ['wang@163.com', Validators.compose([Validators.required, Validators.email, this.validate])],
+      email: ['lisi@163.com', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
     });
   }
 
   onSubmit({ value, valid }, ev: Event) {
     ev.preventDefault();
-    console.log(JSON.stringify(value));
-    console.log(valid);
+    if (!valid) {
+      return;
+    }
+    this.store$.dispatch(new authActions.LoginAction(value));
   }
 
   /**
@@ -49,19 +52,19 @@ export class LoginComponent implements OnInit {
    * @returns {{[key: string]: any}}
    * @memberof LoginComponent
    */
-  validate(c: FormControl): { [key: string]: any } {
-    if (!c.value) {
-      return null;
-    }
+  // validate(c: FormControl): { [key: string]: any } {
+  //   if (!c.value) {
+  //     return null;
+  //   }
 
-    const pattern = /^wang+/;
-    if (pattern.test(c.value)) {
-      return null;
-    }
+  //   const pattern = /^wang+/;
+  //   if (pattern.test(c.value)) {
+  //     return null;
+  //   }
 
-    return {
-      emailNotValid: 'The email must satart width wang'
-    };
-  }
+  //   return {
+  //     emailNotValid: 'The email must satart width wang'
+  //   };
+  // }
 
 }

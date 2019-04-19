@@ -4,6 +4,10 @@ import { debounceTime, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { extractInfo, isValidAddr, getAddrByCode } from 'src/app/utils/identity.util';
 import { isValidDate } from '../../utils/date.utils';
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from '../../reducers';
+import * as authActions from '../../actions/auth.action';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store$: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
@@ -66,6 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (!valid) {
       return;
     }
+    this.store$.dispatch(new authActions.RegisterAction(value));
   }
 
 }
