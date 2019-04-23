@@ -66,7 +66,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         map(val => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) })),
       ).subscribe(project => {
         this.store$.dispatch(new actions.AddAction(project));
-        // this.cd.markForCheck();
+        this.cd.markForCheck();
       });
   }
 
@@ -87,7 +87,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         map(val => ({ ...val, id: project.id, coverImg: this.buildImgSrc(val.coverImg) })),
       ).subscribe(prj => {
         this.store$.dispatch(new actions.UpdateAction(prj));
-        // this.cd.markForCheck();
+        this.cd.markForCheck();
       });
   }
 
@@ -100,8 +100,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.store$.dispatch(new actions.DeleteAction(project));
-        // this.cd.markForCheck();
+        this.cd.markForCheck();
       });
+  }
+
+  selectProject(project: Project) {
+    this.store$.dispatch(new actions.SelectProjectAction(project));
   }
 
   private getThumbnails() {

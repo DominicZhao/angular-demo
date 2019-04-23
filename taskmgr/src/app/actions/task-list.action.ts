@@ -18,10 +18,9 @@ export enum ActionTypes {
     LOAD = '[TaskList] Load',
     LOAD_SUCCESS = '[TaskList] Load Success',
     LOAD_FAIL = '[TaskList] Load Fail',
-    INVITE = '[TaskList] Invite',
-    INVITE_SUCCESS = '[TaskList] Invite Success',
-    INVITE_FAIL = '[TaskList] Invite Fail',
-    SELECT_TASKLIST = '[TaskList] Select TaskList',
+    SWAP = '[TaskList] Swap',
+    SWAP_SUCCESS = '[TaskList] Swap Success',
+    SWAP_FAIL = '[TaskList] Swap Fail',
 }
 
 /**
@@ -89,7 +88,7 @@ export class DeleteFailAction implements Action {
 export class LoadAction implements Action {
     readonly type = ActionTypes.LOAD;
 
-    constructor(public payload: null) { }
+    constructor(public payload: string) { }
 }
 
 export class LoadSuccessAction implements Action {
@@ -105,30 +104,24 @@ export class LoadFailAction implements Action {
 }
 
 
-export class InviteAction implements Action {
-    readonly type = ActionTypes.INVITE;
+export class SwapAction implements Action {
+    readonly type = ActionTypes.SWAP;
 
-    constructor(public payload: {projectId: string; members: User[]}) { }
+    constructor(public payload: {src: TaskList; target: TaskList}) { }
 }
 
-export class InviteSuccessAction implements Action {
-    readonly type = ActionTypes.INVITE_SUCCESS;
+export class SwapSuccessAction implements Action {
+    readonly type = ActionTypes.SWAP_SUCCESS;
 
-    constructor(public payload: TaskList) { }
+    constructor(public payload: TaskList[]) { }
 }
 
-export class InviteFailAction implements Action {
-    readonly type = ActionTypes.INVITE_FAIL;
+export class SwapFailAction implements Action {
+    readonly type = ActionTypes.SWAP_FAIL;
 
     constructor(public payload: string) { }
 }
 
-
-export class SelectProjectAction implements Action {
-    readonly type = ActionTypes.SELECT_TASKLIST;
-
-    constructor(public payload: TaskList) { }
-}
 
 
 /**
@@ -148,7 +141,6 @@ export type TaskListActions
     | LoadAction
     | LoadSuccessAction
     | LoadFailAction
-    | InviteAction
-    | InviteSuccessAction
-    | InviteFailAction
-    | SelectProjectAction;
+    | SwapAction
+    | SwapSuccessAction
+    | SwapFailAction;

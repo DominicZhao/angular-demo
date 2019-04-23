@@ -6,6 +6,7 @@ import { Action, Store } from '@ngrx/store';
 import { map, switchMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
 import { ProjectService } from '../services/project.service';
 import * as actions from '../actions/project.action';
+import * as listActions from '../actions/task-list.action';
 import * as fromRoot from '../reducers';
 
 
@@ -74,6 +75,13 @@ export class ProjectEffects {
         map((a: any) => a.payload),
         tap(project => this.router.navigate([`/tasklists/${project.id}`]))
     );
+
+    // @Effect({ dispatch: false })
+    // loadTaskLists$: Observable<Action> = this.actions$.pipe(
+    //     ofType(actions.ActionTypes.SELECT_PROJECT),
+    //     map((a: any) => a.payload),
+    //     tap(project => new listActions.LoadAction(project.id))
+    // );
 
 
     constructor(

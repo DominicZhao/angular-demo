@@ -23,7 +23,6 @@ export class TaskListService {
 
 
   addTaskList(taskList: TaskList): Observable<TaskList> {
-    taskList.id = null;
     const url = `${this.config.uri}/${this.domain}`;
     return this.http.post(url, JSON.stringify(taskList), httpOptions)
       .pipe(
