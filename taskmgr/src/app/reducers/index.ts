@@ -4,7 +4,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { StoreRouterConnectingModule, routerReducer, RouterReducerState, RouterStateSerializer } from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { Auth, Task } from '../domain';
+import { Auth } from '../domain';
 
 import { CustomSerializer, RouterStateUrl } from './custom-route-serializer';
 import * as fromQuote from './quote.reducer';
