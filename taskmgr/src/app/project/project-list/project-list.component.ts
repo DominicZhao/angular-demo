@@ -70,12 +70,17 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       });
   }
 
-  launchInviteDialog() {
-    const dialogRef = this.dialog.open(InviteComponent, { data: { members: [] } });
-    dialogRef.afterClosed()
+  launchInviteDialog(project: Project) {
+    this.store$.select(fromRoot.getProjectUsers(project.id))
       .pipe(
-        take(1),
-      );
+        map(users => this.dialog.open(InviteComponent, { data: { members: users } })),
+        switchMap(dialogRef => dialogRef.beforeClosed()
+          .pipe(
+            take(1)
+          )
+        )
+      )
+      .subscribe(val => this.store$.dispatch(new actions.InviteAction({projectId: project.id, members: val})));
   }
 
   launchUpdateDialog(project: Project) {

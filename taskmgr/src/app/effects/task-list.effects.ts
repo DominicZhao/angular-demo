@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { TaskListService } from '../services/task-list.service';
 import * as actions from '../actions/task-list.action';
-import * as fromRoot from '../reducers';
+import * as taskActions from '../actions/task.action';
 
 
 @Injectable()
@@ -16,7 +15,6 @@ export class TaskListEffects {
         ofType(actions.ActionTypes.LOAD),
         map((a: any) => a.payload),
         switchMap((projectId) => {
-            console.log(projectId);
             return this.service$.getTaskList(projectId).pipe(
                 map(taskLists => new actions.LoadSuccessAction(taskLists)),
                 catchError(err => of(new actions.LoadFailAction(JSON.stringify(err))))
@@ -67,12 +65,18 @@ export class TaskListEffects {
         ))
     );
 
+    @Effect({ dispatch: false })
+    loadTask$: Observable<Action> = this.actions$
+        .pipe(
+            ofType(actions.ActionTypes.LOAD_SUCCESS),
+            map((a: any) => a.payload),
+            map(lists => new taskActions.LoadAction(lists))
+        );
+
 
     constructor(
         private actions$: Actions,
         private service$: TaskListService,
-        private router: Router,
-        private store$: Store<fromRoot.State>
     ) {
 
     }
