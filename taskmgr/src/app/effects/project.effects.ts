@@ -49,7 +49,7 @@ export class ProjectEffects {
         })
     );
 
-    @Effect({ dispatch: false })
+    @Effect()
     updateProjects$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.UPDATE),
         map((a: any) => a.payload),
@@ -59,7 +59,7 @@ export class ProjectEffects {
         ))
     );
 
-    @Effect({ dispatch: false })
+    @Effect()
     delProjects$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.DELETE),
         map((a: any) => a.payload),
@@ -69,7 +69,7 @@ export class ProjectEffects {
         ))
     );
 
-    @Effect({ dispatch: false })
+    @Effect()
     invite$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.INVITE),
         map((a: any) => a.payload),
@@ -86,14 +86,14 @@ export class ProjectEffects {
         tap(project => this.router.navigate([`/tasklists/${project.id}`]))
     );
 
-    // @Effect({ dispatch: false })
-    // loadTaskLists$: Observable<Action> = this.actions$.pipe(
-    //     ofType(actions.ActionTypes.SELECT_PROJECT),
-    //     map((a: any) => a.payload),
-    //     tap(project => new listActions.LoadAction(project.id))
-    // );
+    @Effect()
+    loadTaskLists$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.SELECT_PROJECT),
+        map((a: any) => a.payload),
+        map(project => new listActions.LoadAction(project.id))
+    );
 
-    @Effect({ dispatch: false })
+    @Effect()
     loadUser$: Observable<Action> = this.actions$
         .pipe(
             ofType(actions.ActionTypes.LOAD_SUCCESS),
@@ -102,7 +102,7 @@ export class ProjectEffects {
             map(projectId => new userActions.LoadAction(projectId))
         );
 
-    @Effect({ dispatch: false })
+    @Effect()
     addUserProject$: Observable<Action> = this.actions$
         .pipe(
             ofType(actions.ActionTypes.ADD_SUCCESS),
@@ -117,7 +117,7 @@ export class ProjectEffects {
             )
         );
 
-    @Effect({ dispatch: false })
+    @Effect()
     removeUserProject$: Observable<Action> = this.actions$
         .pipe(
             ofType(actions.ActionTypes.DELETE_SUCCESS),
@@ -132,7 +132,7 @@ export class ProjectEffects {
             )
         );
 
-    @Effect({ dispatch: false })
+    @Effect()
     updateUserProject$: Observable<Action> = this.actions$
         .pipe(
             ofType(actions.ActionTypes.INVITE_SUCCESS),

@@ -31,9 +31,17 @@ import { UserService } from '../../services/user.service';
 })
 export class ChipsListComponent implements OnInit, ControlValueAccessor {
 
-  @Input() multiple = true;
+  private _multiple = true;
+
   @Input() placeholderText = '请输入成员 email';
   @Input() label = '添加/修改成员';
+  @Input()
+  get multiple(): boolean {
+    return this._multiple;
+  }
+  set multiple(value) {
+    this._multiple = this._coerceBooleanProperty(value);
+  }
 
   public myForm: FormGroup;
   public items: User[] = [];
@@ -55,6 +63,10 @@ export class ChipsListComponent implements OnInit, ControlValueAccessor {
         filter(s => s && s.length > 1),
         switchMap(str => this.service.searchUsers(str))
       );
+  }
+
+  private _coerceBooleanProperty(value: any): boolean {
+    return value != null && `${value}` !== 'false';
   }
 
   private propagateChange = (_: any) => { };

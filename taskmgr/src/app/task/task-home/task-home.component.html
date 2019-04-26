@@ -11,7 +11,7 @@
     (dropped)="handleMove($event, list)" 
     [ngStyle]="{'order': list.order}"
     *ngFor="let list of lists$ | async">
-    <app-task-header [header]='list.name' (newTask)="launchNewTaskDialog($event)" (moveAll)="launchCopyTaskDialog()"
+    <app-task-header [header]='list.name' (newTask)="launchNewTaskDialog(list)" (moveAll)="launchCopyTaskDialog(list)"
       (ondel)="launchConfirmDialog(list)" (oneditList)="launchEditListDialog(list)">
     </app-task-header>
     <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>

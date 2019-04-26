@@ -44,6 +44,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     private store$: Store<fromRoot.State>
   ) {
     this.store$.dispatch(new actions.LoadAction(null));
+
     this.projects$ = this.store$.select(fromRoot.getProjects);
     this.listAnim$ = this.projects$.pipe(map(p => p.length));
   }
@@ -76,7 +77,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         map(users => this.dialog.open(InviteComponent, { data: { members: users } })),
         switchMap(dialogRef => dialogRef.beforeClosed()
           .pipe(
-            take(1)
+            take(1),
+            filter(n => n)
           )
         )
       )

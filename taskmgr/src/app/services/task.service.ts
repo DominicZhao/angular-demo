@@ -24,7 +24,6 @@ export class TaskService {
 
 
   addTask(task: Task): Observable<Task> {
-    task.id = null;
     const url = `${this.config.uri}/${this.domain}`;
     return this.http.post(url, JSON.stringify(task), httpOptions)
       .pipe(
