@@ -14,7 +14,7 @@ export class AuthEffects {
     login$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN),
         map((a: any) => a.payload),
-        switchMap(({email, password}) => this.service$.login(email, password).pipe(
+        switchMap(({ email, password }) => this.service$.login(email, password).pipe(
             map(auth => new actions.LoginSuccessAction(auth)),
             catchError(err => of(new actions.LoginFailAction(JSON.stringify(err))))
         ))
