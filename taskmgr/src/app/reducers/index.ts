@@ -60,7 +60,7 @@ export const getTasksWithOwners = createSelector(getTasks, getUserEntities, (tas
     return {
       ...tasks,
       owner: userEntities[task.ownerId],
-      participants: task.particpantIds.map(id => userEntities[id])
+      participants: task.participantIds.map(id => userEntities[id])
     };
   });
 });

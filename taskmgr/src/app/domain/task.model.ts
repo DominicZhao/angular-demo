@@ -8,6 +8,6 @@ export interface Task {
     remark?: string;
     creatDate: Date;
     ownerId?: string;
-    particpantIds: string[];
+    participantIds: string[];
     taskListId: string;
 }

@@ -41,7 +41,7 @@ export class TaskHomeComponent implements OnInit {
     this.projectId$ = this.activated.paramMap.pipe(
       pluck('id')
     );
-    this.lists$ = this.store.select(fromRoot.getTaskLists);
+    this.lists$ = this.store.select(fromRoot.getTasksByLists);
   }
 
   ngOnInit() {
@@ -62,8 +62,17 @@ export class TaskHomeComponent implements OnInit {
 
   }
 
-  launchCopyTaskDialog() {
-    // this.dialog.open(CopyTaskComponent, { data: { lists: this.lists } });
+  launchCopyTaskDialog(list) {
+    this.lists$.pipe(
+      map(l => l.filter(n => n.id !== list.id)),
+      map(li => this.dialog.open(CopyTaskComponent, {data: {lists: li}})),
+      switchMap(dialogRef => dialogRef.afterClosed().pipe(
+        take(1),
+        filter(n => n)
+      ))
+    ).subscribe(
+      val => this.store.dispatch(new taskActions.MoveAllAction({srcListId: list.id, targetListId: val}))
+    );
   }
 
   launchUpdateTaskDialog(item) {
@@ -139,7 +148,7 @@ export class TaskHomeComponent implements OnInit {
         ownerId: user.id,
         completed: false,
         creatDate: new Date(),
-        particpantIds: []
+        participantIds: []
       }))
     );
   }

@@ -40,7 +40,7 @@ export class TaskService {
       dueDate: task.dueDate,
       reminder: task.reminder,
       ownerId: task.ownerId,
-      particpantIds: task.particpantIds,
+      participantIds: task.participantIds,
       remark: task.remark
     };
     return this.http.patch(url, JSON.stringify(toUpdate), httpOptions)

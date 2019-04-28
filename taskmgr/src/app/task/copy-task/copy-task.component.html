@@ -1,14 +1,14 @@
-<form>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit($event, myForm)">
   <h2 mat-dialog-title>移动本列表所有内容：</h2>
   <mat-dialog-content>
-    <mat-select placeholder="请选择目标列表" name="item">
-      <mat-option *ngFor="let item of items" [value]="item">
+    <mat-select placeholder="请选择目标列表" name="item" formControlName="targetListId">
+      <mat-option *ngFor="let item of items" [value]="item.id">
         {{item.name}}
       </mat-option>
     </mat-select>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="button" mat-raised-button color="primary" (click)="save()">保存</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!myForm.valid">保存</button>
     <button type="button" mat-raised-button mat-dialog-close>关闭</button>
   </mat-dialog-actions>
 </form>
