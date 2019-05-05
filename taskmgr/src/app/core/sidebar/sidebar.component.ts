@@ -1,5 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { getDate } from 'date-fns';
+import { Project } from '../../domain';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/project.action';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,8 +14,13 @@ import { getDate } from 'date-fns';
 export class SidebarComponent implements OnInit {
 
   public today = 'day';
+  public projects$: Observable<Project[]>;
 
-  constructor() { }
+  constructor(
+    private store$: Store<fromRoot.State>
+  ) {
+    this.projects$ = this.store$.select(fromRoot.getProjects);
+  }
 
   @Output() navClick = new EventEmitter<void>();
 
@@ -22,5 +32,9 @@ export class SidebarComponent implements OnInit {
     this.navClick.emit();
   }
 
+  onPrjClick(prj: Project) {
+    this.store$.dispatch(new actions.SelectProjectAction(prj));
+    this.navClick.emit();
+  }
 
 }

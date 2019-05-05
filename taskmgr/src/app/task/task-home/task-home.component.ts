@@ -9,7 +9,7 @@ import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 import { Observable } from 'rxjs';
-import { pluck, take, filter, map, switchMap } from 'rxjs/operators';
+import { pluck, take, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { TaskList } from '../../domain';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
@@ -39,7 +39,7 @@ export class TaskHomeComponent implements OnInit {
     private activated: ActivatedRoute,
   ) {
     this.projectId$ = this.activated.paramMap.pipe(
-      pluck('id')
+      map(p => p.get('id'))
     );
     this.lists$ = this.store.select(fromRoot.getTasksByLists);
   }
@@ -110,7 +110,8 @@ export class TaskHomeComponent implements OnInit {
     const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '新建列表' } });
     dialogRef.afterClosed()
       .pipe(
-        take(1)
+        take(1),
+        withLatestFrom(this.projectId$, (val, projectId) => ({...val, projectId: projectId}))
       )
       .subscribe(result => this.store.dispatch(new actions.AddAction(result)));
     // this.cd.markForCheck();
