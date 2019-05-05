@@ -4,16 +4,17 @@ import { cold, hot } from 'jasmine-marbles';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { AuthEffects } from './auth.effects';
 import { AuthService } from '../services/auth.service';
+import { AppRoutingModule } from '../app-routing.module';
 import * as authActions from '../actions/auth.action';
 
-describe('Auth Effects', () => {
 
+describe('Auth Effects', () => {
   let actions: Observable<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        // any modules needed
+        AppRoutingModule
       ],
       providers: [
         AuthEffects,
@@ -30,9 +31,9 @@ describe('Auth Effects', () => {
     const authService = TestBed.get(AuthService);
     if (params) {
       if (methodName === 'login') {
-        authService.login.and.returnedAuth(params.returnedAuth);
+        authService.login.and.returnValues(params.returnedAuth);
       } else {
-        authService.register.and.returnedAuth(params.returnedAuth);
+        authService.register.and.returnValues(params.returnedAuth);
       }
     }
     return {
@@ -55,7 +56,7 @@ describe('Auth Effects', () => {
     const expectedResult = new authActions.LoginSuccessAction(auth);
     actions = hot('--a-', { a: action });
     const expected = cold('--b', { b: expectedResult });
-    expect(authEffects.login$).toEqual(expected);
+    expect(authEffects.login$).toBeObservable(expected);
   }));
 });
 
